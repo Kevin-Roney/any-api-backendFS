@@ -14,6 +14,18 @@ describe('backend-express-template routes', () => {
     const bands = await Band.getAll();
     expect(res.body).toEqual(bands);
   });
+  it('GET /bands/:id responds with a single band', async () => {
+    const res = await request(app).get('/bands/6');
+    const tatsuro = {
+      id: '6',
+      name: 'Tatsuro Yamashita',
+      url: 'https://en.wikipedia.org/wiki/File:Tatsuro_Yamashita_(4to3).png',
+      genre: 'Rock',
+      subgenre: 'Pop',
+      year: 1976,
+    };
+    expect(res.body).toEqual(tatsuro);
+  });
   afterAll(() => {
     pool.end();
   });
